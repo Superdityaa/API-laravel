@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\mahasiswa;
 use App\Models\majalah;
 use Illuminate\Http\Request;
 
@@ -23,24 +22,24 @@ class MajalahController extends Controller
         $request->validate([
             'cover' => 'required',
             'judul' => 'required',
-            'seri' => 'required',
-            'genre' => 'required|integer',
+            'seri' => 'required|integer',
+            'genre' => 'required',
             'penerbit' => 'required',
         ]);
 
-        $newMajalah = new majalah();
+        $majalah = new majalah();
         
-        $newMajalah->avatar = $request->avatar;
-        $newMajalah->nama = $request->nama;
-        $newMajalah->nim = $request->nim;
-        $newMajalah->semester = $request->semester;
-        $newMajalah->jurusan = $request->jurusan;
+        $majalah->cover = $request->cover;
+        $majalah->judul = $request->judul;
+        $majalah->seri = $request->seri;
+        $majalah->genre = $request->genre;
+        $majalah->penerbit = $request->penerbit;
 
-        $newMajalah->save();
+        $majalah->save();
 
         return response()->json([
-            'message' => 'Data mahasiswa berhasil ditambahkan',
-            'data' => $newMajalah,
+            'message' => 'Data majalah berhasil ditambahkan',
+            'data' => $majalah,
         ], 201); 
     }
 
@@ -62,7 +61,7 @@ class MajalahController extends Controller
         $majalah->delete();
 
         return response()->json([
-            'message' => 'Item Terhapus'
+            'message' => 'Majalah Terhapus'
         ], 204);
     }
 }
